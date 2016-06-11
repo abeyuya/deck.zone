@@ -1,13 +1,14 @@
 
-export class WebworkerService {
+export class WebWorker {
 
   constructor() {
     this.workerToUrl = new WeakMap();
     this.promiseToWorker = new WeakMap();
   }
 
-  run(workerFunction) {
+  run(workerFunction, data) {
     const url = this.getOrCreateWorkerUrl(workerFunction);
+    console.log(url, workerFunction, data);
     return this.runUrl(url, data);
   }
 
@@ -16,6 +17,7 @@ export class WebworkerService {
     const promise = this.createPromiseForWorker(worker, data);
     const promiseCleaner = this.createPromiseCleaner(promise);
 
+    console.log(promise, worker);
     this.promiseToWorker.set(promise, worker);
 
     promise
@@ -27,10 +29,10 @@ export class WebworkerService {
 
   createPromiseForWorker(worker, data) {
     return new Promise((resolve, reject) => {
-        worker.addEventListener('message', (event) => resolve(event.data));
-        worker.addEventListener('error', reject);
-        worker.postMessage(data);
-      });
+      worker.addEventListener('message', (event) => resolve(event.data));
+      worker.addEventListener('error', reject);
+      worker.postMessage(data);
+    });
   }
 
   getOrCreateWorkerUrl(fn) {
@@ -60,7 +62,7 @@ export class WebworkerService {
     };
   }
 
-  removePromise() {
+  removePromise(promise) {
     const worker = this.promiseToWorker.get(promise);
     if(worker) {
       worker.terminate();
