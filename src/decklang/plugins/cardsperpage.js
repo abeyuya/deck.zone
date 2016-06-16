@@ -7,6 +7,8 @@ export class CardsPerPage extends Plugin {
 
   static get docs() { return 'The cardsperpage directive is used to determine how many cards will fit on the page (first the number of cards per row, then the number of rows per page).'; }
 
+  static get examples() { return ['cardsperpage = 3, 3']; }
+
   static get snippets() {
     return [`
 snippet cardsperpage

@@ -7,10 +7,12 @@ export class Font extends Plugin {
 
   static get docs() { return 'The font directive is used to change the font properties of all following text directives.'; }
 
+  static get examples() { return ['font = "Arial", 16px, BUI, #000']; }
+
   static get snippets() {
     return [`
 snippet font
-\tfont = "\${1:font}", \${2:fontsize}, \${3:BUI}, \${4:#000}
+\tfont = "\${1:font}", \${2:fontsize}, \${3:BUIS}, \${4:#000}
     `];
   }
 

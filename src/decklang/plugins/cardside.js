@@ -7,6 +7,13 @@ export class CardSide extends Plugin {
 
   static get docs() { return 'The cardside directive is used to determine which side all following directives should operate on.'; }
 
+  static get examples() {
+    return [
+      'cardside = front',
+      'cardside = back'
+    ];
+  }
+
   static get snippets() {
     return [`
 snippet cardside

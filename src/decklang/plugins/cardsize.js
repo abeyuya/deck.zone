@@ -7,6 +7,13 @@ export class CardSize extends Plugin {
 
   static get docs() { return 'The cardsize directive is used to determine thee width and height of each card.'; }
 
+  static get examples() {
+    return [
+      'cardsize = poker',
+      'cardsize = 2.5in, 3.5in'
+    ];
+  }
+
   static get snippets() {
     return [`
 snippet cardsize

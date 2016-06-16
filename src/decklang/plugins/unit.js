@@ -7,6 +7,8 @@ export class Unit extends Plugin {
 
   static get docs() { return 'The unit directive sets a default unit for use with all number-related directives.'; }
 
+  static get examples() { return ['unit = cm']; }
+
   static get snippets() {
     return [`
 snippet unit

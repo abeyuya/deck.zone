@@ -7,6 +7,13 @@ export class PageSize extends Plugin {
 
   static get docs() { return 'The pagesize directive is used to determine the print size of the page.'; }
 
+  static get examples() {
+    return [
+      'pagesize = letter',
+      'pagesize = 8.5in, 11in'
+    ];
+  }
+
   static get snippets() {
     return [`
 snippet pagesize

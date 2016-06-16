@@ -9,6 +9,8 @@ export class Text extends Plugin {
 
   static get docs() { return 'The text directive is used to draw text on a card.'; }
 
+  static get examples() { return ['text = 1, "This is some text", 0, 0, 1cm, 1cm, center, middle']; }
+
   static get snippets() {
     return [`
 snippet text

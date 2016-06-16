@@ -7,6 +7,8 @@ export class Ellipse extends Plugin {
 
   static get docs() { return 'The ellipse directive is used to draw ellipses on a card.'; }
 
+  static get examples() { return ['ellipse = 1, 0, 0, 2cm, 2cm, 1px, #000, #f00']; }
+
   static get snippets() {
     return [`
 snippet ellipse

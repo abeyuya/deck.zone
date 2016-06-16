@@ -7,6 +7,13 @@ export class CardMargins extends Plugin {
 
   static get docs() { return 'The cardmargins directive is used to put margins between cards when printing.'; }
 
+  static get examples() {
+    return [
+      'cardmargins = 5px',
+      'cardmargins = 5px, 5px, 5px, 5px'
+    ];
+  }
+
   static get snippets() {
     return [`
 snippet cardmargins

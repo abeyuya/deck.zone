@@ -7,6 +7,8 @@ export class Image extends Plugin {
 
   static get docs() { return 'The image directive is used to draw images on cards.'; }
 
+  static get examples() { return ['image = 1, "http://example.com/image.png", 0, 0, 2cm, 2cm']; }
+
   static get snippets() {
     return [`
 snippet image
