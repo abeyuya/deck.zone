@@ -5,6 +5,8 @@ export class CardSize extends Plugin {
 
   static get help() { return 'cardsize = width, height'; }
 
+  static get docs() { return 'The cardsize directive is used to determine thee width and height of each card.'; }
+
   static get snippets() {
     return [`
 snippet cardsize

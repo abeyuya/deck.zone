@@ -12,7 +12,7 @@
       <div class="card card-block">
 
         <p class="card-text help-text">
-          this is the help text for the directive
+          {{directiveText(directive)}}
         </p>
 
         <ul>
@@ -23,8 +23,10 @@
                   class="help-symbol"
                   [class.has-comma]="symbol.commaBefore">
 
-              <span *ngIf="symbol.hasMore" class="has-tooltip" [tooltip]="help.secondarys[symbol.str]">{{ symbol.str }}</span>
-              <span *ngIf="!symbol.hasMore">{{ symbol.str }}</span>
+              <span [class.has-tooltip]="symbol.hasMore"
+                    [class.is-optional]="symbol.optional"
+                    [tooltipEnable]="symbol.hasMore"
+                    [tooltip]="help.secondarys[symbol.str]">{{ symbol.str }}</span>
 
             </span>
 

@@ -7,6 +7,8 @@ export class Text extends Plugin {
 
   static get help() { return 'text = index, string, x, y, width, height [, horizontalalign [, verticalalign] ]'; }
 
+  static get docs() { return 'The text directive is used to draw text on a card.'; }
+
   static get snippets() {
     return [`
 snippet text

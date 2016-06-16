@@ -5,6 +5,8 @@ export class Unit extends Plugin {
 
   static get help() { return 'unit = cssunit'; }
 
+  static get docs() { return 'The unit directive sets a default unit for use with all number-related directives.'; }
+
   static get snippets() {
     return [`
 snippet unit

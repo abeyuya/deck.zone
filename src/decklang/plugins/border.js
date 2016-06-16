@@ -5,6 +5,8 @@ export class Border extends Plugin {
 
   static get help() { return 'border = style [, csscolor [, width] ]'; }
 
+  static get docs() { return 'The border directive is used to add a border to all cards.'; }
+
   static get snippets() {
     return [`
 snippet border

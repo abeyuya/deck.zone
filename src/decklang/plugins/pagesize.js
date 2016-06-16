@@ -5,6 +5,8 @@ export class PageSize extends Plugin {
 
   static get help() { return 'pagesize = width, height'; }
 
+  static get docs() { return 'The pagesize directive is used to determine the print size of the page.'; }
+
   static get snippets() {
     return [`
 snippet pagesize

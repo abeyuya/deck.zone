@@ -5,6 +5,8 @@ export class NewCard extends Plugin {
 
   static get help() { return 'newcard = indexname'; }
 
+  static get docs() { return 'The newcard directive is a shortcut to create a new card and get the index for it put into a variable.'; }
+
   static get snippets() {
     return [`
 snippet newcard

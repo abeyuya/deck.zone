@@ -5,6 +5,8 @@ export class Font extends Plugin {
 
   static get help() { return 'font = font, fontsize [, style [, color] ]'; }
 
+  static get docs() { return 'The font directive is used to change the font properties of all following text directives.'; }
+
   static get snippets() {
     return [`
 snippet font

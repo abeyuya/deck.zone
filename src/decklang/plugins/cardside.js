@@ -5,6 +5,8 @@ export class CardSide extends Plugin {
 
   static get help() { return 'cardside = side'; }
 
+  static get docs() { return 'The cardside directive is used to determine which side all following directives should operate on.'; }
+
   static get snippets() {
     return [`
 snippet cardside

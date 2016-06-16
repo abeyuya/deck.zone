@@ -7,6 +7,7 @@ import './help.less';
 import { TitleChangerService } from '../../services/titlechanger';
 
 import help from './help.json';
+import { PLUGINS } from '../../decklang/decklangstate';
 
 @Component({
   template
@@ -17,13 +18,13 @@ export class HelpComponent {
     return [[TitleChangerService]];
   }
 
+  directiveText(directive) {
+    return PLUGINS[directive].docs;
+  }
+
   ngOnInit() {
     this.help = help;
     this.directives = _.keys(help.directives);
-  }
-
-  ngOnChanges(changes) {
-    console.log(changes);
   }
 
   constructor(titleChangerService) {
