@@ -18,6 +18,10 @@ export class HelpComponent {
     return [[TitleChangerService]];
   }
 
+  helpText(directive) {
+    return PLUGINS[directive].help;
+  }
+
   exampleText(directive) {
     return PLUGINS[directive].examples;
   }
