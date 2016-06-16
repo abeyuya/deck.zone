@@ -9,8 +9,8 @@ export class PageSize extends Plugin {
 
   static get examples() {
     return [
-      'pagesize = letter',
-      'pagesize = 8.5in, 11in'
+      'pagesize = 8.5in, 11in',
+      'pagesize = letter'
     ];
   }
 

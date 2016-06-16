@@ -9,8 +9,8 @@ export class CardSize extends Plugin {
 
   static get examples() {
     return [
-      'cardsize = poker',
-      'cardsize = 2.5in, 3.5in'
+      'cardsize = 2.5in, 3.5in',
+      'cardsize = poker'
     ];
   }
 
