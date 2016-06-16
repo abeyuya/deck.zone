@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "build:app": "webpack -p --progress && cp src/index.html dist/index.html && echo 'deck.zone' >> dist/CNAME",
-    "build:lang": "npm run build:lang:directives && npm run build:lang:map && npm run build:lang:help && nearleyc decklang/decklang.ne -o src/decklang/decklang.js",
+    "build:lang": "npm run build:lang:directives && npm run build:lang:map && nearleyc decklang/decklang.ne -o src/decklang/decklang.js && npm run build:lang:help",
     "build:lang:directives": "node gen/build-lang-directives > decklang/_directives.ne",
     "build:lang:help": "node gen/build-lang-help > src/components/help/help.json",
     "build:lang:map": "node gen/build-lang-map > src/decklang/plugins.json",
