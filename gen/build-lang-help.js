@@ -19,7 +19,8 @@ const secondaryRules = [];
 const aliases = {
   PositiveCssVariable: 'CssValue',
   PositiveCssValue: 'CssValue',
-  PositiveIntegerVariable: 'PositiveInteger'
+  PositiveIntegerVariable: 'PositiveInteger',
+  String: '"Text"'
 };
 
 const parseSymbol = (symbol) => {
