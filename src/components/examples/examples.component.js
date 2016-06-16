@@ -17,7 +17,7 @@ export class ExamplesComponent {
   }
 
   constructor(router, titleChangerService, angularFire) {
-    titleChangerService.changeTitle('');
+    titleChangerService.changeTitle('Examples');
 
     this.router = router;
 
