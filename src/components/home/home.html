@@ -1,3 +1,15 @@
+<div class="container">
+  <div class="jumbotron">
+    <h1>Welcome to the Deck Zone</h1>
+
+    <p>
+      deck.zone is a tool to help you prototype your board games rapidly.
+      Using a simple domain-specific language (DSL) called Decklang you can create a whole deck of cards in a matter of minutes.
+      Couple the simplicity of Decklang with the friendliness of the tool and you have success right in front of your eyes!
+    </p>
+
+  </div>
+</div>
 
 <div class="container">
 
@@ -12,7 +24,10 @@
           {{homeblock.title}}
         </h4>
         <div class="card-text">
-          <span>{{homeblock.text}}</span>
+          <p>{{homeblock.text}}</p>
+          <p *ngIf="homeblock.buttonText">
+            <button class="btn btn-secondary" [routerLink]="homeblock.buttonLink">{{homeblock.buttonText}}</button>
+          </p>
         </div>
       </div>
     </div>
