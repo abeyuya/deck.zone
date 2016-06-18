@@ -1,6 +1,8 @@
 
 import { Plugin } from './_base/_plugin';
 
+import { WebWorker } from '../services/webworker';
+
 import grammar from './decklang';
 import nearley from 'nearley';
 import _ from 'lodash';
@@ -20,6 +22,10 @@ export class DecklangParser {
 
   parse() {
     return this.results(this.preParse());
+  }
+
+  workerParse() {
+    return this.workerResults(this.preParse());
   }
 
   preParse() {
@@ -48,6 +54,16 @@ export class DecklangParser {
 
   removeComments(script) {
     return script.replace(REGEXES.comment, '');
+  }
+
+  workerResults(script) {
+    const worker = new WebWorker();
+    console.log('creating worker');
+    return worker.run(this.parser.feed, script)
+      .then(x => {
+        console.log('res', x);
+        return x;
+      });
   }
 
   results(script) {

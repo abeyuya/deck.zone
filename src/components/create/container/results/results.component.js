@@ -185,6 +185,9 @@ export class ResultsComponent extends ProjectComponent {
       try {
         const instructions = newParser.parse();
 
+        console.log('start');
+        newParser.workerParse().then(x => console.log('x',x));
+
         newParser.runInstructions(this.state, newState, instructions, defaultScope);
 
         this.state.internalState = newState;
