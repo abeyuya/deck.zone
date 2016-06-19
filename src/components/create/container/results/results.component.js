@@ -182,12 +182,7 @@ export class ResultsComponent extends ProjectComponent {
       const newState = this.state.newState();
       const newParser = new DecklangParser({ script: currentScript.contents });
 
-      try {
-        const instructions = newParser.parse();
-
-        console.log('start');
-        newParser.workerParse().then(x => console.log('x',x));
-
+      newParser.workerParse().then(instructions => {
         newParser.runInstructions(this.state, newState, instructions, defaultScope);
 
         this.state.internalState = newState;
@@ -196,13 +191,13 @@ export class ResultsComponent extends ProjectComponent {
         this.setCardDisplay();
         this.loading = false;
         this.handleError({ message: 'No errors.' });
-
-      } catch(e) {
+      }, (e) => {
         console.error(e);
         console.error('Error near', newParser.preParse().substring(e.offset - 5, e.offset + 5));
         this.loading = false;
         this.handleError({ message: this.getScriptLineFromOffset(currentScript.contents, e.offset) });
-      }
+      });
+
     }).catch(e => {
       this.handleError({ message: e.message });
     });

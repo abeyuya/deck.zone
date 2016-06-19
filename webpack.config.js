@@ -14,6 +14,11 @@ module.exports = {
   module: {
     loaders: [
       {
+        test: /\.worker.js$/,
+        loaders: ['worker-loader', 'babel-loader'],
+        exclude: /node_modules/
+      },
+      {
         test: /\.js$/,
         loaders: ['babel-loader', 'eslint-loader'],
         exclude: /node_modules/

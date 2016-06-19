@@ -1,7 +1,7 @@
 
 import { Plugin } from './_base/_plugin';
 
-import { WebWorker } from '../services/webworker';
+import DecklangWorker from './decklang.worker';
 
 import grammar from './decklang';
 import nearley from 'nearley';
@@ -57,13 +57,19 @@ export class DecklangParser {
   }
 
   workerResults(script) {
-    const worker = new WebWorker();
-    console.log('creating worker');
-    return worker.run(this.parser.feed, script)
-      .then(x => {
-        console.log('res', x);
-        return x;
-      });
+    return new Promise((resolve, reject) => {
+      const worker = new DecklangWorker();
+      worker.onmessage = (msg) => {
+
+        if(msg.data.error) {
+          return reject(msg.data.error);
+        }
+
+        resolve(_(msg.data[0]).flattenDeep().compact().value());
+      };
+
+      worker.postMessage(script);
+    });
   }
 
   results(script) {
