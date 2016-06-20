@@ -25,7 +25,7 @@ export class EmbedViewComponent {
   }
 
   constructor(routeParams, currentProjectService) {
-    const { projectId, scriptId, tabs } = routeParams.params;
+    const { projectId, scriptId, tabs, print } = routeParams.params;
 
     if (!projectId || !scriptId || !tabs) {
       this.markBad('isMisconfigured');
@@ -54,6 +54,7 @@ export class EmbedViewComponent {
       this.scriptName = value.scripts[this.scriptId].name;
     });
 
+    this.printStyles = print;
     this.activeTab = this.tabs[0];
     this.showPrint = _.includes(this.tabs, 'result') && !this.inIframe;
   }
