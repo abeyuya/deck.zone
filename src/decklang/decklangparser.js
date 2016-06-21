@@ -1,8 +1,6 @@
 
 import { Plugin } from './_base/_plugin';
 
-import DecklangWorker from './decklang.worker';
-
 import grammar from './decklang';
 import nearley from 'nearley';
 import _ from 'lodash';
@@ -58,6 +56,9 @@ export class DecklangParser {
 
   workerResults(script) {
     return new Promise((resolve, reject) => {
+
+      const DecklangWorker = require('./decklang.worker');
+      
       const worker = new DecklangWorker();
       worker.onmessage = (msg) => {
 
