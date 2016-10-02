@@ -53,14 +53,21 @@ export class ResultsComponent extends ProjectComponent {
     const { page } = state.options;
 
     style.innerHTML = `
+      @page {
+        size: ${page.width} ${page.height};
+        margin-top: ${page['margin-top']};
+        margin-left: ${page['margin-left']};
+        margin-right: ${page['margin-right']};
+        margin-bottom: ${page['margin-bottom']};
+      }
+
       @media print {
-        html, body, .printable, .results-pane, .embed-view {
+        html, .printable, .results-pane, .embed-view {
           width: ${page.width} !important;
           height: ${page.height} !important;
         }
 
-        @page {
-          size: ${page.width} ${page.height};
+        body {
           margin-top: ${page['margin-top']};
           margin-left: ${page['margin-left']};
           margin-right: ${page['margin-right']};
