@@ -21,9 +21,9 @@ snippet border
 
     const { style, color, width } = args;
 
-    state.options.card['border-style'] = style;
-    state.options.card['border-color'] = color;
-    state.options.card['border-width'] = super.combineForUnit(width, state);
+    state.options.card['outline-style'] = style;
+    state.options.card['outline-color'] = color;
+    state.options.card['outline-width'] = super.combineForUnit(width, state);
   }
 
 }
