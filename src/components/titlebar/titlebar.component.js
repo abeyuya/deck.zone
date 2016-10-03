@@ -1,6 +1,6 @@
 
 import { Component } from '@angular/core';
-import { ROUTER_DIRECTIVES, Router } from '@angular/router-deprecated';
+import { ROUTER_DIRECTIVES, Router } from '@angular/router';
 import { AuthProviders, AuthMethods } from 'angularfire2';
 import template from './titlebar.html';
 import { DROPDOWN_DIRECTIVES } from 'ng2-bootstrap/components/dropdown';
@@ -29,10 +29,10 @@ export class TitleBarComponent {
     titleChangerService.currentSubTitle.subscribe(val => this.currentSubTitle = val);
     this.showSelf = false;
 
-    this.router.subscribe(
-      currentUrl => this.showSelf = !_.includes(currentUrl, 'embed'),
-      error => console.log(error)
-    );
+    this.router.events.subscribe(event => {
+      this.url = event.url;
+      this.showSelf = !_.includes(this.url, 'embed');
+    });
   }
 
   logout() {
@@ -49,6 +49,10 @@ export class TitleBarComponent {
 
   createProject() {
     const id = this.currentProjectService.createNewProject();
-    this.router.navigate(['/Create', 'Create', { projectId: id }]);
+    this.router.navigate(['/create', id]);
+  }
+
+  hasRouteActive(route) {
+    return _.includes(this.url, route);
   }
 }

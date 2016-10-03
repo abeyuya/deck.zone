@@ -28,14 +28,14 @@
         *ngIf="auth.owns(project)"
         tooltipPlacement="bottom"
         tooltip="Change the settings for this project."
-        [routerLink]="['../Settings', { projectId: projectId }]">
+        [routerLink]="['./', 'settings']">
   <i fa [icon]="'cog'" fw="true"></i>
 </button>
 
 <div class="btn-group" dropdown>
   <a class="btn btn-info-outline"
      target="_blank"
-     [routerLink]="['/Embed', 'Embed', { projectId: projectId, scriptId: project?.activeScript, tabs: 'result,code' }]"
+     [routerLink]="['/embed', projectId, { scriptId: project?.activeScript, tabs: 'result,code' }]"
      tooltipPlacement="bottom"
      tooltipAppendToBody="true"
      tooltip="View result in an external window.">
@@ -48,14 +48,14 @@
     <li>
       <a class="dropdown-item"
          target="_blank"
-         [routerLink]="['/Embed', 'Embed', { projectId: projectId, scriptId: project?.activeScript, tabs: 'code' }]">
+         [routerLink]="['/embed', projectId, { scriptId: project?.activeScript, tabs: 'code' }]">
         <i fa [icon]="'code'" fw="true"></i> Code Only
       </a>
     </li>
     <li>
       <a class="dropdown-item"
          target="_blank"
-         [routerLink]="['/Embed', 'Embed', { projectId: projectId, scriptId: project?.activeScript, tabs: 'result' }]">
+         [routerLink]="['/embed', projectId, { scriptId: project?.activeScript, tabs: 'result' }]">
         <i fa [icon]="'photo'" fw="true"></i> Result Only
       </a>
     </li>

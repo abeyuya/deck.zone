@@ -42,13 +42,13 @@
         <div class="card-block no-padding-bottom">
           <div class="col-md-9">
             <h4 class="card-title truncate-text">
-              <a [routerLink]="['/Create', 'Create', { projectId: project.$key }]">{{project.name}}</a>
+              <a [routerLink]="['/create', project.$key]">{{project.name}}</a>
             </h4>
           </div>
           <div class="col-md-3">
             <button type="button"
                     class="pull-md-right btn btn-xs btn-primary-outline"
-                    [routerLink]="['/Create', 'Settings', { projectId: project.$key }]">
+                    [routerLink]="['/create', project.$key, 'settings']">
               <i fa [icon]="'cog'" [fw]="true"></i>
             </button>
           </div>

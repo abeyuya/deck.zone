@@ -1,7 +1,7 @@
 
 import { Component, EventEmitter } from '@angular/core';
 import template from './createcontainer.html';
-import { RouteParams, Router } from '@angular/router-deprecated';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
@@ -21,37 +21,42 @@ import { TitleChangerService } from '../../../services/titlechanger';
 })
 export class CreateContainerComponent {
   static get parameters() {
-    return [[RouteParams], [Router], [CurrentProjectService], [TitleChangerService], [StorageService], [Auth]];
+    return [[ActivatedRoute], [Router], [CurrentProjectService], [TitleChangerService], [StorageService], [Auth]];
   }
 
-  constructor(routeParams, router, currentProjectService, titleChangerService, storage, auth) {
-    this.projectId = routeParams.params.projectId;
+  constructor(activatedRoute, router, currentProjectService, titleChangerService, storage, auth) {
+
     this.storage = storage.local;
     this.authData = auth.authData;
+    this.activatedRoute = activatedRoute;
 
     this.parseError = new EventEmitter();
 
-    if(!this.projectId) {
-      return router.navigate(['/Home']);
-    }
+    this.activatedRoute.params.subscribe(params => {
 
-    this.projectData = currentProjectService.getContent(this.projectId);
-    this.projectData._ref.on('value', snap => {
-      const value = snap.val();
+      this.projectId = params.projectId;
 
-      this.projectData.ownsProject = auth.owns(value);
-      const isPrivate = value.visibility === 'Private';
-
-      if(!value || (!this.projectData.ownsProject && isPrivate)) {
-        router.navigate(['../Invalid', { projectId: this.projectId }]);
-        return;
+      if(!this.projectId) {
+        return router.navigate(['/']);
       }
 
-      titleChangerService.changeTitle(value.name);
-    });
+      this.projectData = currentProjectService.getContent(this.projectId);
+      this.projectData._ref.on('value', snap => {
+        const value = snap.val();
 
-    this.scriptList = currentProjectService.getScriptList(this.projectId);
-    this.resourceList = currentProjectService.getResourceList(this.projectId);
+        this.projectData.ownsProject = auth.owns(value);
+        const isPrivate = value ? value.visibility === 'Private' : true;
+
+        if(!value || (!this.projectData.ownsProject && isPrivate)) {
+          return router.navigate(['create', this.projectId, '404']);
+        }
+
+        titleChangerService.changeTitle(value.name);
+      });
+
+      this.scriptList = currentProjectService.getScriptList(this.projectId);
+      this.resourceList = currentProjectService.getResourceList(this.projectId);
+    });
 
     this.api = {
       changeActiveScript: (index)           => this.projectData._ref.child('activeScript').set(index),

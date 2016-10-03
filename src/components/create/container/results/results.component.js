@@ -4,8 +4,6 @@ import template from './results.html';
 import './results.less';
 import { ProjectComponent } from '../project.component';
 
-import { VsFor } from 'ng2-vs-for/src/ng2-vs-for';
-
 import * as Components from '../../../../decklang/components/_components';
 
 import _ from 'lodash';
@@ -18,7 +16,7 @@ import { DecklangState } from '../../../../decklang/decklangstate';
 @Component({
   selector: 'results',
   providers: [StorageService],
-  directives: [..._.values(Components), VsFor],
+  directives: [..._.values(Components)],
   inputs: ['project', 'projectId', 'displayScript', 'usePageStyle', 'errorHandler'],
   template
 })

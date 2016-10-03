@@ -3,16 +3,16 @@
     ☰
   </button>
   <div class="collapse navbar-toggleable-xs" id="navbar-header">
-    <a class="navbar-brand" [routerLink]="['/Home']">deck.zone</a>
-    <ul class="nav navbar-nav" *ngIf="!router.isRouteActive(router.generate(['/Create', 'Root']))">
+    <a class="navbar-brand" [routerLink]="['/']">deck.zone</a>
+    <ul class="nav navbar-nav" *ngIf="!hasRouteActive('create')">
       <li class="nav-item">
         <a class="nav-link" (click)="createProject()">Create</a>
       </li>
-      <li class="nav-item" [class.active]="router.isRouteActive(router.generate(['/Help']))">
-        <a class="nav-link" [routerLink]="['/Help']">Docs</a>
+      <li class="nav-item" [class.active]="hasRouteActive('help')">
+        <a class="nav-link" [routerLink]="['/help']">Docs</a>
       </li>
-      <li class="nav-item" [class.active]="router.isRouteActive(router.generate(['/Examples']))">
-        <a class="nav-link" [routerLink]="['/Examples']">Examples</a>
+      <li class="nav-item" [class.active]="hasRouteActive('examples')">
+        <a class="nav-link" [routerLink]="['/examples']">Examples</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="http://blog.deck.zone" target="_blank">Blog</a>
@@ -37,7 +37,7 @@
         <a class="nav-link active" dropdownToggle>{{ (auth.angularFire.auth | async)[(auth.angularFire.auth | async).auth.provider].displayName }} <b class="caret"></b></a>
         <ul class="dropdown-menu dropdown-menu-right">
           <li>
-            <a class="dropdown-item" [routerLink]="['/Projects']">My Projects</a>
+            <a class="dropdown-item" [routerLink]="['/projects']">My Projects</a>
           </li>
           <li class="dropdown-divider"></li>
           <li>

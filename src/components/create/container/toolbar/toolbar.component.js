@@ -2,7 +2,7 @@
 import { Component } from '@angular/core';
 import template from './toolbar.html';
 import { ProjectComponent } from '../project.component';
-import { ROUTER_DIRECTIVES, Router } from '@angular/router-deprecated';
+import { ROUTER_DIRECTIVES, Router } from '@angular/router';
 import { DROPDOWN_DIRECTIVES } from 'ng2-bootstrap/components/dropdown';
 
 import { StorageService } from 'ng2-storage';
@@ -40,7 +40,7 @@ export class ToolbarComponent extends ProjectComponent {
   fork() {
     this.internalProject.projectId = this.projectId;
     const id = this.currentProjectService.createNewProject(this.internalProject);
-    this.router.navigate(['/Create', 'Create', { projectId: id }]);
+    this.router.navigate(['/create', id]);
   }
 
   download() {

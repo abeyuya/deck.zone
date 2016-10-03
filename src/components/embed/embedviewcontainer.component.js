@@ -1,8 +1,6 @@
 
 import { Component } from '@angular/core';
-import { RouteConfig, ROUTER_DIRECTIVES } from '@angular/router-deprecated';
-
-import { EmbedViewComponent } from './embedview/embedview.component';
+import { ROUTER_DIRECTIVES } from '@angular/router';
 
 import template from './embedviewcontainer.html';
 
@@ -10,10 +8,6 @@ import template from './embedviewcontainer.html';
   directives: [ROUTER_DIRECTIVES],
   template
 })
-@RouteConfig([
-  { path:'/',                     name: 'Root',     component: EmbedViewComponent, useAsDefault: true },
-  { path:'/:projectId',           name: 'Embed',    component: EmbedViewComponent }
-])
 export class EmbedViewContainerComponent {
 
   constructor() {}

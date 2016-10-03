@@ -4,7 +4,7 @@ import template from './home.html';
 import './home.less';
 import { HomeBlocksService } from '../../services/homeblocks';
 import { TitleChangerService } from '../../services/titlechanger';
-import { ROUTER_DIRECTIVES } from '@angular/router-deprecated';
+import { ROUTER_DIRECTIVES } from '@angular/router';
 
 @Component({
   providers: [HomeBlocksService],

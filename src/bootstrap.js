@@ -5,7 +5,7 @@ import 'reflect-metadata';
 import 'zone.js/dist/zone';
 
 import 'bootstrap/dist/css/bootstrap.css';
-import { ROUTER_PROVIDERS } from '@angular/router-deprecated';
+import { ROUTER_DIRECTIVES } from '@angular/router';
 import { NgStyle } from '@angular/common';
 import { provide, PLATFORM_DIRECTIVES, enableProdMode } from '@angular/core';
 import { Title } from '@angular/platform-browser';
@@ -20,6 +20,8 @@ import { Auth } from './services/auth';
 import { StorageSettings } from 'ng2-storage';
 import { TOOLTIP_DIRECTIVES } from 'ng2-bootstrap/components/tooltip';
 
+import { APP_ROUTER_PROVIDERS } from './components/app.routes';
+
 if(window.location.hostname !== 'localhost') enableProdMode();
 
 bootstrap(App, [
@@ -27,7 +29,8 @@ bootstrap(App, [
   TitleChangerService,
   NgStyle,
   Auth,
-  ROUTER_PROVIDERS,
+  APP_ROUTER_PROVIDERS,
+  ROUTER_DIRECTIVES,
   FIREBASE_PROVIDERS,
   provide(StorageSettings, { useValue: { prefix: 'dz' } }),
   provide(PLATFORM_DIRECTIVES, { useValue: TOOLTIP_DIRECTIVES, multi: true }),

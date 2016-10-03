@@ -2,7 +2,7 @@
 import _ from 'lodash';
 
 import { Component } from '@angular/core';
-import { RouteParams, ROUTER_DIRECTIVES } from '@angular/router-deprecated';
+import { ActivatedRoute, ROUTER_DIRECTIVES } from '@angular/router';
 import { window } from '@angular/platform-browser/src/facade/browser';
 import { ResultsComponent } from '../../create/container/results/results.component';
 
@@ -21,42 +21,46 @@ import template from './embedview.html';
 export class EmbedViewComponent {
 
   static get parameters() {
-    return [[RouteParams], [CurrentProjectService]];
+    return [[ActivatedRoute], [CurrentProjectService]];
   }
 
-  constructor(routeParams, currentProjectService) {
-    const { projectId, scriptId, tabs, print } = routeParams.params;
+  constructor(activatedRoute, currentProjectService) {
+    this.activatedRoute = activatedRoute;
 
-    if (!projectId || !scriptId || !tabs) {
-      this.markBad('isMisconfigured');
-      return;
-    }
+    this.activatedRoute.params.subscribe(params => {
+      const { projectId, scriptId, tabs, print } = params;
 
-    this.inIframe = window.self !== window.top;
-
-    this.projectId = projectId;
-    this.scriptId = scriptId;
-    this.tabs = tabs.split(',');
-
-    this.projectData = currentProjectService.getContent(this.projectId);
-    this.projectData._ref.on('value', snap => {
-      const value = snap.val();
-
-      if(!value) {
-        this.markBad('is404');
+      if (!projectId || !scriptId || !tabs) {
+        this.markBad('isMisconfigured');
         return;
       }
 
-      if(value.visibility === 'Private') {
-        this.markBad('isPrivate');
-      }
+      this.inIframe = window.self !== window.top;
 
-      this.scriptName = value.scripts[this.scriptId].name;
+      this.projectId = projectId;
+      this.scriptId = scriptId;
+      this.tabs = tabs.split(',');
+
+      this.projectData = currentProjectService.getContent(this.projectId);
+      this.projectData._ref.on('value', snap => {
+        const value = snap.val();
+
+        if(!value) {
+          this.markBad('is404');
+          return;
+        }
+
+        if(value.visibility === 'Private') {
+          this.markBad('isPrivate');
+        }
+
+        this.scriptName = value.scripts[this.scriptId].name;
+      });
+
+      this.printStyles = print;
+      this.activeTab = this.tabs[0];
+      this.showPrint = _.includes(this.tabs, 'result') && !this.inIframe;
     });
-
-    this.printStyles = print;
-    this.activeTab = this.tabs[0];
-    this.showPrint = _.includes(this.tabs, 'result') && !this.inIframe;
   }
 
   markBad(reason) {

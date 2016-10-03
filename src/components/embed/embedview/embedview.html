@@ -2,7 +2,7 @@
 <nav class="navbar navbar-static-top navbar-light bg-faded no-print" *ngIf="isBad || (projectData | async)">
   <div class="collapse navbar-toggleable-xs">
 
-    <a class="navbar-brand" target="_blank" [routerLink]="['/Create', 'Create', { projectId: projectId }]">deck.zone</a>
+    <a class="navbar-brand" target="_blank" [routerLink]="['/create', projectId]">deck.zone</a>
     <a class="navbar-brand">
       <small>{{scriptName}}</small>
     </a>

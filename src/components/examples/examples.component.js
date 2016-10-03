@@ -1,6 +1,6 @@
 
 import { Component } from '@angular/core';
-import { ROUTER_DIRECTIVES, Router } from '@angular/router-deprecated';
+import { ROUTER_DIRECTIVES, Router } from '@angular/router';
 import { AngularFire } from 'angularfire2';
 import template from './examples.html';
 import './examples.less';

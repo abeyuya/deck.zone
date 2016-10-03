@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { FORM_DIRECTIVES, FormBuilder, Validators } from '@angular/common';
 import template from './settings.html';
 import './settings.less';
-import { RouteParams, Router, ROUTER_DIRECTIVES } from '@angular/router-deprecated';
+import { ActivatedRoute, Router, ROUTER_DIRECTIVES } from '@angular/router';
 
 import { SweetAlertService } from 'ng2-sweetalert2';
 
@@ -22,35 +22,39 @@ import _ from 'lodash';
 export class SettingsComponent {
 
   static get parameters() {
-    return [[RouteParams], [Router], [FormBuilder], [TitleChangerService], [CurrentProjectService], [SweetAlertService], [Auth]];
+    return [[ActivatedRoute], [Router], [FormBuilder], [TitleChangerService], [CurrentProjectService], [SweetAlertService], [Auth]];
   }
 
-  constructor(routeParams, router, formBuilder, titleChangerService, currentProjectService, swalService, auth) {
-    this.projectId = routeParams.params.projectId;
+  constructor(activatedRoute, router, formBuilder, titleChangerService, currentProjectService, swalService, auth) {
+    this.activatedRoute = activatedRoute;
     this.router = router;
     this.currentProjectService = currentProjectService;
     this.swalService = swalService;
 
-    this.projectRef = currentProjectService.getContent(this.projectId);
-    this.projectRef.subscribe(val => {
+    this.activatedRoute.params.subscribe(params => {
+      this.projectId = params.projectId;
 
-      if(!auth.owns(val)) {
-        return this.router.navigate(['../Invalid', { projectId: this.projectId }]);
-      }
+      this.projectRef = currentProjectService.getContent(this.projectId);
+      this.projectRef.subscribe(val => {
 
-      if(!val) {
-        return this.router.navigate(['../../Home']);
-      }
+        if(!auth.owns(val)) {
+          return this.router.navigate(['../create', this.projectId, '404']);
+        }
 
-      titleChangerService.changeTitle(`${val.name} - Settings`);
+        if(!val) {
+          return this.router.navigate(['/']);
+        }
 
-      this.form = formBuilder.group({
-        name: [val.name, Validators.required],
-        visibility: [val.visibility, Validators.required]
+        titleChangerService.changeTitle(`${val.name} - Settings`);
+
+        this.form = formBuilder.group({
+          name: [val.name, Validators.required],
+          visibility: [val.visibility, Validators.required]
+        });
+
+        this.name = this.form.controls.name;
+        this.visibility = this.form.controls.visibility;
       });
-
-      this.name = this.form.controls.name;
-      this.visibility = this.form.controls.visibility;
     });
   }
 
@@ -65,7 +69,7 @@ export class SettingsComponent {
       if(!val) return;
 
       this.projectRef._ref.remove();
-      this.router.navigate(['../../Projects']);
+      this.router.navigate(['../../projects']);
     });
   }
 }

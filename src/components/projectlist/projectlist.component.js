@@ -1,6 +1,6 @@
 
 import { Component } from '@angular/core';
-import { ROUTER_DIRECTIVES, Router } from '@angular/router-deprecated';
+import { ROUTER_DIRECTIVES, Router } from '@angular/router';
 import template from './projectlist.html';
 import './projectlist.less';
 
@@ -37,7 +37,7 @@ export class ProjectListComponent {
 
       // route home if not logged in
       if (!authData) {
-        return this.router.navigate(['../Home']);
+        return this.router.navigate(['/']);
       }
 
       this.projects = this.currentProjectService.getAllProjects(authData.auth.uid);
@@ -47,6 +47,6 @@ export class ProjectListComponent {
 
   createProject(name) {
     const id = this.currentProjectService.createNewProject({ name });
-    this.router.navigate(['/Create', 'Create', { projectId: id }]);
+    this.router.navigate(['/create', id]);
   }
 }
