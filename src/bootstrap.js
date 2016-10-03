@@ -1,4 +1,6 @@
 
+require.context('../favicon', true, /^\.\//);
+
 import 'reflect-metadata';
 import 'zone.js/dist/zone';
 

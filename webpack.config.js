@@ -32,6 +32,10 @@ module.exports = {
         loader: 'style!css!less'
       },
       {
+        test: /\.png|\.ico|\.xml/,
+        loader:'file-loader?name=favicon/[path][name].[ext]&context=./favicon'
+      },
+      {
         test: /\.json/,
         loader: 'json'
       },
