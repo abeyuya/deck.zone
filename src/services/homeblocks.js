@@ -10,13 +10,13 @@ export class HomeBlocksService {
         title: 'Integrated Help',
         text: 'No need to reach for the manual for help - everything is integrated into the editor! With the help of autocomplete and an easy syntax reference, finding help is easy!',
         buttonText: 'View Help »',
-        buttonLink: ['/Help']
+        buttonLink: ['/help']
       },
       {
         title: 'Examples & Tutorials',
         text: 'There are plenty of examples for anything you might need, from the simplest demonstration of a directive to more complex examples like a deck of cards, or Werewolf.',
         buttonText: 'View Examples »',
-        buttonLink: ['/Examples']
+        buttonLink: ['/examples']
       }
     ];
   }
