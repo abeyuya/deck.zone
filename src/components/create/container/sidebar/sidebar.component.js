@@ -1,7 +1,7 @@
 
 import _ from 'lodash';
 import { SweetAlertService } from 'ng2-sweetalert2';
-import { Component } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
 import { NgClass } from '@angular/common';
 import template from './sidebar.html';
 import './sidebar.less';
@@ -23,13 +23,14 @@ const FILE_EXTENSION = '.deck';
 export class SidebarComponent extends ProjectComponent {
 
   static get parameters() {
-    return [[SweetAlertService], [CurrentProjectService], [Auth]];
+    return [[SweetAlertService], [NgZone], [CurrentProjectService], [Auth]];
   }
 
-  constructor(swal, currentProjectService, auth) {
+  constructor(swal, zone, currentProjectService, auth) {
     super();
     this.isVisible = {};
     this.auth = auth;
+    this.zone = zone;
     this.swalService = swal;
     this.currentProjectService = currentProjectService;
   }
@@ -75,23 +76,28 @@ export class SidebarComponent extends ProjectComponent {
     this.swalService.swal({
       title: 'New Resource',
       html:
-      `
-        <div class="swal2-content" style="display: block;">Enter the URL for your resource:</div>
-        <input id="swal-input1" type="url" pattern="https?://.+" class="swal2-input" placeholder="http://..." autofocus>
-        <div class="swal2-content" style="display: block;">Enter a name for your resource:</div>
-        <input id="swal-input2" class="swal2-input" placeholder="Name...">
-      `,
-      preConfirm: (result) => {
-        return new Promise((resolve) => {
-          if(!result) return;
+        `
+      <div class="swal2-content" style="display: block;">Enter the URL for your resource:</div>
+      <input id="swal-input1" type="url" pattern="https?://.+" class="swal2-input" placeholder="http://..." autofocus>
+      <div class="swal2-content" style="display: block;">Enter a name for your resource:</div>
+      <input id="swal-input2" class="swal2-input" placeholder="Name..." maxlength="20">
+    `,
+      preConfirm: () => {
+        return new Promise((resolve /* , reject */) => {
+          const url = document.getElementById('swal-input1').value;
+          const filename = document.getElementById('swal-input2').value;
+
+          // if(!url)      return reject('No url specified.');
+          // if(!filename) return reject('No filename specified.');
+
           resolve([
-            document.getElementById('swal-input1').value,
-            document.getElementById('swal-input2').value
+            url,
+            filename
           ]);
-        });
+        }).then(val => val, err => { throw err; });
       }
     }).then(val => {
-      if(!val) return;
+      if(!val || !val.length || !val[0] || !val[1]) return;
       val[1] = val[1].replace(/[^\w:]/gm, '');
       this.api.newResource({ url: val[0], name: val[1] });
     });
@@ -99,9 +105,12 @@ export class SidebarComponent extends ProjectComponent {
 
   newFile() {
     this.swalService.prompt({
-      title:'New File',
+      title: 'New File',
       text: 'Enter a new file name:',
       inputPlaceholder: 'filename.deck',
+      inputAttributes: {
+        maxlength: 20
+      },
       inputValidator: this.validateFilename.bind(this, this.allScripts)
     }).then(val => {
       if(!val) return;
