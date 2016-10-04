@@ -36,7 +36,7 @@
     "jszip": "^3.0.0",
     "lodash": "^4.11.2",
     "mathjs": "^3.2.1",
-    "ng2-ace": "0.0.14",
+    "ng2-ace": "0.0.15",
     "ng2-bootstrap": "1.0.24",
     "ng2-fontawesome": "^0.0.6",
     "ng2-storage": "^0.0.4",
