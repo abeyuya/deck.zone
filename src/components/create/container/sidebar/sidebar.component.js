@@ -56,8 +56,8 @@ export class SidebarComponent extends ProjectComponent {
     this.api.changeActiveScript(index);
   }
 
-  validateFilename(scriptList, value) {
-    const duplicateName = () => _.some(scriptList, scriptObj => _.includes([value, `${value}${FILE_EXTENSION}`], scriptObj.script.name));
+  validateFilename(scriptList, value, type = 'script') {
+    const duplicateName = () => _.some(scriptList, scriptObj => _.includes([value, `${value}${FILE_EXTENSION}`], scriptObj[type].name));
     return new Promise((resolve, reject) => {
       if(!value)                                 return reject('You need to give the file a name.');
       if(value.length > STRING_SIZES.scriptName) return reject('File name limited to 20 characters.');
@@ -83,17 +83,22 @@ export class SidebarComponent extends ProjectComponent {
       <input id="swal-input2" class="swal2-input" placeholder="Name..." maxlength="20">
     `,
       preConfirm: () => {
-        return new Promise((resolve /* , reject */) => {
+        return new Promise((resolve, reject /**/) => {
           const url = document.getElementById('swal-input1').value;
           const filename = document.getElementById('swal-input2').value;
 
-          // if(!url)      return reject('No url specified.');
-          // if(!filename) return reject('No filename specified.');
+          if(!url)      return reject('No url specified.');
+          if(!filename) return reject('No filename specified.');
 
-          resolve([
-            url,
-            filename
-          ]);
+          this.validateFilename(this.allResources, filename, 'resource')
+            .then(() => {
+              resolve([
+                url,
+                filename
+              ]);
+            }, reject);
+
+
         }).then(val => val, err => { throw err; });
       }
     }).then(val => {
