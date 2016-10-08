@@ -188,7 +188,13 @@ export class ResultsComponent extends ProjectComponent {
       const newParser = new DecklangParser({ script: currentScript.contents });
 
       newParser.workerParse().then(instructions => {
-        newParser.runInstructions(this.state, newState, instructions, defaultScope);
+        try {
+          newParser.runInstructions(this.state, newState, instructions, defaultScope);
+        } catch(e) {
+          this.loading = false;
+          this.handleError({ message: e.message });
+          return;
+        }
 
         this.state.internalState = newState;
         this.addPagePrintRules(newState);
@@ -203,7 +209,8 @@ export class ResultsComponent extends ProjectComponent {
         this.handleError({ message: this.getScriptLineFromOffset(currentScript.contents, e.offset) });
       });
 
-    }).catch(e => {
+    }, e => {
+      this.loading = false;
       this.handleError({ message: e.message });
     });
   }
