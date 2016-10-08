@@ -72,7 +72,7 @@ export class CreatorComponent extends ProjectComponent {
   }
 
   directiveHelp(line) {
-    const directive = line.split('=')[0].trim();
+    const directive = line.split('=')[0].split('`').join('').trim();
     if(_.includes(directive, '[') || !directive || !_.includes(line, '=')) return '';
     const plugin = PLUGINS[directive];
     if(!plugin) return `No help available for ${directive}.`;
