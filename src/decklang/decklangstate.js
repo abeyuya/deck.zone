@@ -55,12 +55,30 @@ class InternalState {
     return card;
   }
 
+  getCurrentCardFrontAndBack() {
+    const cardFronts = this.cards.front;
+    const cardBacks = this.cards.back;
+
+    let frontCard = _.last(cardFronts);
+    if(!frontCard || cardFronts.length < cardBacks.length) {
+      frontCard = this.newCard();
+      cardFronts.push(frontCard);
+    }
+
+    let backCard = _.last(cardBacks);
+    if(!backCard || cardBacks.length < cardFronts.length) {
+      backCard = this.newCard();
+      cardBacks.push(backCard);
+    }
+    return [frontCard, backCard];
+  }
+
   getAllCards() {
     return this.cards.front.concat(this.cards.back);
   }
 
   newCard() {
-    return { texts: [], images: [], shapes: [] };
+    return { texts: [], images: [], shapes: [], _cardrender: true };
   }
 }
 

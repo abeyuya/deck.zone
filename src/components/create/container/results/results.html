@@ -11,6 +11,7 @@
 
   <div class="game-card"
        *ngFor="let card of cardDisplayList; let i = index"
+       [class.hidden]="!card._cardrender"
        [class.page-break]="card._pagebreak"
        [class.game-card-reverse]="usePageStyle && card._reverse"
        [ngStyle]="state.internalState.options.card">
