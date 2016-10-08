@@ -92,8 +92,8 @@ export class DecklangParser {
     switch(operator) {
     case '>':   return leftEval > rightEval;
     case '>=':  return leftEval >= rightEval;
-    case '==':  return leftEval === rightEval;
-    case '!=':  return leftEval !== rightEval;
+    case '==':  return leftEval == rightEval;
+    case '!=':  return leftEval != rightEval;
     case '<=':  return leftEval <= rightEval;
     case '<':   return leftEval < rightEval;
     default:    return false;

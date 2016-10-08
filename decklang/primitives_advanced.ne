@@ -33,6 +33,10 @@ CardSize ->
 | "square"      {% function() { return { width: { val: 3.5, unit: 'in' },   height: { val: 3.5, unit: 'in' } } } %}
 | "tarot"       {% function() { return { width: { val: 2.75, unit: 'in' },  height: { val: 4.75, unit: 'in' } } } %}
 
+CardRender ->
+  "yes"   {% function() { return true; } %}
+| "no"    {% function() { return false; } %}
+
 CardSide ->
   "front" {% id %}
 | "back"  {% id %}

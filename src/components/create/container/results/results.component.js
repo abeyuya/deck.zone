@@ -193,6 +193,7 @@ export class ResultsComponent extends ProjectComponent {
         } catch(e) {
           this.loading = false;
           this.handleError({ message: e.message });
+          console.error(e);
           return;
         }
 
