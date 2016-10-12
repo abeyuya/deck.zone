@@ -24,6 +24,7 @@ snippet border
     state.options.card['outline-style'] = style;
     state.options.card['outline-color'] = color;
     state.options.card['outline-width'] = super.combineForUnit(width, state);
+    state.options.card['outline-offset'] = `-${state.options.card['outline-width']}`;
   }
 
 }
