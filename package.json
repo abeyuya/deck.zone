@@ -14,7 +14,7 @@
     "test:lint": "eslint \"src/**/*.js\"",
     "test:ava": "ava --require babel-register",
     "test": "npm run build:lang && npm run test:lint && npm run test:ava && npm run test:lang",
-    "start": "npm run build:lang && webpack-dev-server --open --content-base src/ --inline --hot",
+    "start": "npm run build:lang && webpack-dev-server --open --content-base src/ --inline --hot --host 0.0.0.0",
     "deploy": "npm run build:app && firebase deploy"
   },
   "dependencies": {

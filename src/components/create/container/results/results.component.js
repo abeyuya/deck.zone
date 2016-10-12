@@ -66,6 +66,7 @@ export class ResultsComponent extends ProjectComponent {
         }
 
         body {
+          padding: 0;
           margin-top: ${page['margin-top']};
           margin-left: ${page['margin-left']};
           margin-right: ${page['margin-right']};
