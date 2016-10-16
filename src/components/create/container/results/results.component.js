@@ -48,15 +48,15 @@ export class ResultsComponent extends ProjectComponent {
     style.appendChild(document.createTextNode(''));
     document.head.appendChild(style);
 
-    const { page } = state.options;
+    const { page, card } = state.options;
 
     style.innerHTML = `
       @page {
         size: ${page.width} ${page.height};
-        margin-top: ${page['margin-top']};
-        margin-left: ${page['margin-left']};
-        margin-right: ${page['margin-right']};
-        margin-bottom: ${page['margin-bottom']};
+        margin-top: calc(${page['margin-top']} - ${card['border-width']} / 2);
+        margin-left: calc(${page['margin-left']} - ${card['border-width']} / 2);
+        margin-right: calc(${page['margin-right']} - ${card['border-width']} / 2);
+        margin-bottom: calc(${page['margin-bottom']} - ${card['border-width']} / 2);
       }
 
       @media print {

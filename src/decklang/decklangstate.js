@@ -32,9 +32,9 @@ const defaultState = {
     'margin-right': 0,
     'margin-bottom': 0,
     // 'outline-offset': '-1px',
-    'outline-style': 'none',
-    'outline-width': '1px',
-    'outline-color': '#000'
+    'border-style': 'none',
+    'border-width': '1px',
+    'border-color': '#000'
   }
 };
 
