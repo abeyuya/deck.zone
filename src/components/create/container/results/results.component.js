@@ -60,17 +60,16 @@ export class ResultsComponent extends ProjectComponent {
       }
 
       @media print {
-        html, .printable, .results-pane, .embed-view {
-          width: ${page.width} !important;
-          height: ${page.height} !important;
-        }
-
         body {
           padding: 0;
-          margin-top: ${page['margin-top']};
-          margin-left: ${page['margin-left']};
-          margin-right: ${page['margin-right']};
-          margin-bottom: ${page['margin-bottom']};
+        }
+
+        .results-pane {
+          padding: 0;
+        }
+
+        .container-fluid {
+          margin: 0;
         }
       }
     `;
